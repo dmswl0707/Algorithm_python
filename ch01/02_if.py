@@ -38,7 +38,7 @@ else:
 
 # 알람 시계 난이도 ***
 H, M = int(input()), int(input()) #H는 시간 M은 분을 나타낸다.
-#H, M = map(int, input()).split
+#H, M = map(int, input().split())
 if M>44 :
     print(H, M-45)
 elif M<45 and H>0:
