@@ -42,7 +42,7 @@ for j in range(1, 10000):
 
 ans = set(range(1, 10000)) - rmv
 for num in sorted(ans):
-    #print(num)
+    print(num)
 
 ## 한수 *****
 
