@@ -54,10 +54,3 @@ print(bst.search(8)) # True
 print(bst.search(15)) # False
 
 
-
-
-
-
-
-
-
