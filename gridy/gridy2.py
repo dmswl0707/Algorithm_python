@@ -1,9 +1,9 @@
 
-# 숫자 카드 게임 유형
+# Q.숫자 카드 게임 유형
 # 가장 작은 행 중에서 가장 큰 수 찾는 유형
 
 # n은 행의갯수, m은 열의갯수
-'''
+
 n, m = map(int, input().split())
 print(n)
 
@@ -19,4 +19,3 @@ for i in range(n):
     result = max(result, min_value)
 
 print(result)
-'''

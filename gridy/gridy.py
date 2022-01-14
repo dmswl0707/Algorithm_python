@@ -8,7 +8,7 @@
 n = 1260
 count = 0
 
-# 동전의 종류
+# Q.동전의 종류
 coin_type = [500, 100, 50, 10]
 
 for coin in coin_type:
