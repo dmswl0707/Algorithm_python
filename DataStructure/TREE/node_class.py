@@ -6,7 +6,7 @@ class Node:
         self.value = value
         self.left, self.right = None, None
 
-# BST 클래스 만들기
+# BST 클래스 만들기(이진탐색트리)
 
 class BST_node:
     def __init__(self, head):
