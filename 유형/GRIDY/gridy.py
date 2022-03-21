@@ -5,15 +5,15 @@
 # 당장 큰수를 고르는 것이 최적의 해를 장담하지는 않음
 
 
-n = 1260
-count = 0
+n = 1260 # 총 금액
+count = 0 # 갯수의 초기화 값
 
 # Q.동전의 종류
 coin_type = [500, 100, 50, 10]
 
 for coin in coin_type:
-    count += n//coin  # 총 금액을 동전 타입으로 나눔
-    n %= coin
+    count += n//coin  # 총 금액을 나눌수 있는 동전 단위로 나눔
+    n %= coin # 총 금액을 동전 타입으로 나눔
 
 print(count)
 
