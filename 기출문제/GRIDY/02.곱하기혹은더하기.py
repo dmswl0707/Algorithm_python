@@ -1,0 +1,3 @@
+
+n = map(int, input())
+
