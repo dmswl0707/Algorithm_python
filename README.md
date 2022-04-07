@@ -50,14 +50,40 @@
 > #### 접근 방식  
 > 1. 문제의 요점을 파악하여, 문제 유형을 가려낸다.
 > 2. DFS의 경우 -> 재귀 용법 또는 스택 구조 이용. (재귀용법 대신 스택구조로만 활용하면 시간복잡도 줄일 수 있음)
-> > - 탐색 시작 노드를 스택에 저장하고 방문 처리.  
-> > - 시작 지점에서 방문하지 않은 인접 노드가 있다면, 스택에 넣고 방문 처리.  
-> > - 방문한 인접노드 밖에 없다면, 스택에서 꺼냄. (2-3번을 반복하면 모든 노드를 순회)  
+>  - 탐색 시작 노드를 스택에 저장하고 방문 처리.  
+>  - 시작 지점에서 방문하지 않은 인접 노드가 있다면, 스택에 넣고 방문 처리.  
+>  - 방문한 인접노드 밖에 없다면, 스택에서 꺼냄. (2-3번을 반복하면 모든 노드를 순회)  
+> ```python
+> def dfs(graph, v, visited):
+>    # 현재 노드 방문 처리
+>    visited[v]=True
+>    print(v, end=' ')
+>    # 현재 노드와 방문한 노드를 재귀적으로 호출
+>    for i in graph[v]:
+>        if not visited[i]:
+>            dfs(graph, i, visited)
+> 
+> # ++ 스택을 이용할 때는, 리스트와 append/pop을 이용한다.
+> ```
 > 3. BFS의 경우 -> 큐 구조 이용.
-> > - 탐색 시작 노드를 큐에 저장하고 방문 처리.
-> > - 시작 지점에서 방문하지 않은 인접 노드가 있다면, 큐에 넣고 방문 처리.
-> > - 방문한 인접노드 밖에 없다면, 큐에서 꺼냄. (2-3번을 반복하면 모든 노드를 순회)
-
+>  - 탐색 시작 노드를 큐에 저장하고 방문 처리.
+>  - 시작 지점에서 방문하지 않은 인접 노드가 있다면, 큐에 넣고 방문 처리.
+>  - 방문한 인접노드 밖에 없다면, 큐에서 꺼냄. (2-3번을 반복하면 모든 노드를 순회)  
+> ```python
+> def bfs(graph, start, visited):
+>    # 큐 구현 -> deque 사용
+>    queue = deque([start])
+>    # 현재 노드 방문 처리
+>    visited[start] = True
+>    while queue:
+>        # 피포
+>        v = queue.popleft()
+>        print(v, end=' ')
+>        for i in graph[v]:
+>            if not visited[i]:
+>                queue.append(i)
+>                visited[i]=True
+> ```
 ### (4) 정렬
 정렬 유형은 주로, 데이터가 여러 개 주어지고 정렬 알고리즘 개념을 이용하여 문제를 해결하는 유형
 
@@ -78,6 +104,37 @@
 이진 탐색 유형은 *데이터 탐색 범위를 반으로 줄여나가면서, 데이터를 빠르게 탐색* 하는 기법  
 내부의 데이터가 *정렬* 되어 있을 때, 시작점/중간점/끝점 세가지 변수를 이용하여 적용. 
 
+> #### 접근 방식
+> 1. 문제의 요점을 파악하여, 문제 유형을 가려낸다.
+> 2. 재귀함수 또는 반복문을 이용해 데이터를 탐색한다.  
+> -  재귀함수를 이용한 방식  
+> ```python
+> def binary_search(array, target, start, end):
+>    if start>end:
+>        return None
+>    mid = (start+end)//2
+>
+>    if array[mid]==target:
+>        return mid
+>    elif array[mid]>target:
+>        return binary_search(array, target, start, mid-1)
+>    else:
+>        return binary_search(array, target, mid+1, end)
+> ```  
+> - 반복문을 이용한 방식 
+> ```python
+> def binary_search(array, target, start, end):
+>    while start<=end:
+>        mid = (start+end) // 2
+>        if array[mid] == target:
+>            return mid
+>        elif array[mid] > target:
+>            end = mid - 1
+>        else:
+>            start = mid + 1
+>    return None
+> ```
+
 #### ++ 파이썬 이진탐색 라이브러리(bisect)
 ```python
 from bisect import bisect_left, bisect_right
@@ -86,15 +143,34 @@ x = 4
 print(bisect_left(a, x))
 print(bisect_right(a, x))
 ```
-### (6) 다이나믹 프로그래밍
-다이나믹 프로그래밍이란 인접한 항 사이의 관계를 점화식으로 정리하여 문제를 해결하는 유형
-(계산된 부분은 메모리에 기록하여 다시 계산하지 않도록 함)
+### (6) 다이나믹 프로그래밍(=동적 계획법)
+다이나믹 프로그래밍이란, 계산된 부분을 다시 계산하지 않도록 하여(메모제이션) 연산속도를 증가시키고,
+인접한 항 사이의 관계를 점화식으로 정리하여 문제에서 요구하는 요점을 효율적으로 해결하는 유형이다.
 
 > #### 접근 방식
 > 1. 문제의 요점을 파악하여, 문제 유형을 가려낸다.
 > 2. 1차원 리스트에 메모리를 기록하도록 선언한다.
 > 3. 탑 다운 유형
-> - 큰 문제를 해결하기 위해, 재귀 함수를 이용하여 작은 문제를 호출하는 방식
+> - 재귀 함수를 이용하여 큰 문제에서 작은 문제를 해결하는 방식
+> ```python
+> d = [0] * 100
+> def fibo(x):
+>    if x==1 or x==2:
+>        return 1
+>    if d[x]!=0:
+>        return d[x]
+>    d[x]=fibo(x-1)+fibo(x-2)
+>    return d[x]
+> ```
 > 4. 보텀 업 유형
 > - 단순한 반복문을 이용해 작은 문제를 해결하고, 큰 문제를 해결하는 방식
+> ```python
+> d = [0] * 100
+> d[1]=1
+> d[2]=1
+> n = 99
+> for i in range(3, n+1):
+>     d[i] = d[i-1]+d[i-2]
 > 
+> print(d[n])
+> ```
