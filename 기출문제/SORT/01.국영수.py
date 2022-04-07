@@ -20,3 +20,4 @@ information = sorted(information, key = lambda x: (-x[1],x[2], -x[3], x[0]))
 
 for name in information:
     print(information[0])
+
