@@ -97,6 +97,7 @@ for i in range(1, n + 1):
     else:
         print(distance[i])
 
+# 플로이드 워셜 유형
 from sys import stdin
 
 INF = int(1e9)

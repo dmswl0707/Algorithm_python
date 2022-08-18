@@ -19,6 +19,7 @@ for i in range(1,n+1):
     if i == j:
       graph[i][j] = 0
 
+# 플로이드 워셜 알고리즘 사용
 for i in range(1,n+1):
   for a in range(1,n+1):
     for b in range(1,n+1):
